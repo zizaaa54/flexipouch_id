@@ -26,7 +26,7 @@ export default function CheckoutPage({
   const [success, setSuccess] = useState(false);
   const [showPaymentModal, setShowPaymentModal] = useState(false);
 
-  // METODE PEMBAYARAN
+  // metode pembayaran
   const [paymentMethod, setPaymentMethod] = useState("Transfer Bank");
 
   const paymentOptions = [
@@ -35,7 +35,7 @@ export default function CheckoutPage({
     "E-Wallet (Dana / OVO / Gopay)",
   ];
 
-  // QTY
+  // quantity
   const [quantities, setQuantities] = useState(
     items.map(() => 1)
   );
@@ -54,14 +54,14 @@ export default function CheckoutPage({
     }
   };
 
-  // TOTAL
+  // total
   const subtotal = items.reduce(
     (sum, item, index) =>
       sum + Number(item.price) * quantities[index],
     0
   );
 
-  // 🔥 FUNGSI UNTUK MENDAPATKAN NOMOR PEMBAYARAN
+  // fungsi untuk nomor pembayaran
   const getPaymentNumber = () => {
     if (paymentMethod === "E-Wallet (Dana / OVO / Gopay)") {
       return {
@@ -73,12 +73,12 @@ export default function CheckoutPage({
     return null;
   };
 
-  // 🔥 OPEN MODAL SEBELUM ORDER
+  // open modal sblm payment
   const handleOpenPayment = () => {
     setShowPaymentModal(true);
   };
 
-  // 🔥 ORDER SETELAH KONFIRMASI PEMBAYARAN
+  // order setelah pembayaran
   const handleOrder = async () => {
     const user = auth.currentUser;
 
@@ -108,7 +108,7 @@ export default function CheckoutPage({
     }
   };
 
-  // PDF STRUK (ALFAMART STYLE)
+  // struk pdf
   const handlePrint = () => {
     const doc = new jsPDF({
       unit: "mm",
@@ -201,7 +201,7 @@ export default function CheckoutPage({
     doc.save("struk-flexipouch.pdf");
   };
 
-  // BACK (hapus cart)
+  // back dan hapus cart
   const handleBack = () => {
     setSuccess(false);
     onOrderSuccess();
@@ -331,7 +331,7 @@ export default function CheckoutPage({
 
       </div>
 
-      {/* 🔥 MODAL PEMBAYARAN */}
+      {/* MODAL PEMBAYARAN */}
       {showPaymentModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-2xl max-w-md w-full p-6">
@@ -343,7 +343,7 @@ export default function CheckoutPage({
               Silakan transfer ke nomor berikut:
             </p>
 
-            {/* 🔥 TRANSFER BANK - NOMOR SUDAH DIUBAH */}
+            {/* TRANSFER BANK - NOMOR SUDAH DIUBAH */}
             {paymentMethod === "Transfer Bank" && (
               <div className="bg-gray-100 p-4 rounded-lg mb-4">
                 <p className="font-semibold">Bank BCA</p>
